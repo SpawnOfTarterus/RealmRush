@@ -36,7 +36,7 @@ public class EnemyMovement : MonoBehaviour
         yield return null;
         if (lastBlockVisited == pathfinder.GetEndBlock())
         {
-            Destroy(gameObject);
+            GetComponent<Enemy>().ExploadOnTarget();
         }
     }
 }

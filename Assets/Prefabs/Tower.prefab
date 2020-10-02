@@ -168,7 +168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 500
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4859,8 +4859,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerTop: {fileID: 3699930543620533726}
   gun: {fileID: 662188163}
-  damage: 10
+  damage: 20
   fireRange: 4.9
+  builtPosition: {fileID: 0}
 --- !u!1001 &768862663401855220
 PrefabInstance:
   m_ObjectHideFlags: 0

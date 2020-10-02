@@ -3302,6 +3302,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8691122777645090924, guid: 20e9dae4de5fceb418df724efe5a528f, type: 3}
   m_PrefabInstance: {fileID: 1068119637}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1151083155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1151083156}
+  m_Layer: 0
+  m_Name: All Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1151083156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151083155}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1169263714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5859,6 +5889,10 @@ PrefabInstance:
       propertyPath: enemyPrefab
       value: 
       objectReference: {fileID: 114941686308246830, guid: 04f81ff9814844ccfa08226f8d46a3f4, type: 3}
+    - target: {fileID: 4788171306953976723, guid: b16a89b37eb23f8488f0651da02610fb, type: 3}
+      propertyPath: FXParent
+      value: 
+      objectReference: {fileID: 1151083156}
     - target: {fileID: 8006477147586424211, guid: b16a89b37eb23f8488f0651da02610fb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

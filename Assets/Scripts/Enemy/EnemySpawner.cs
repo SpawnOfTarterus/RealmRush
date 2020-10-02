@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Enemy enemyPrefab = null;
     [SerializeField] Block startBlock = null;
     [SerializeField] int maxEnemies = 1;
+    [SerializeField] Transform FXParent = null;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
         for (int enemiesSpawned = 0; enemiesSpawned < maxEnemies; enemiesSpawned++)
         {
             Enemy enemyInstance = Instantiate(enemyPrefab, startBlock.transform.position, Quaternion.identity, transform);
+            enemyInstance.FXParent = FXParent;
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
