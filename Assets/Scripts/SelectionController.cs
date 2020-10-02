@@ -10,8 +10,7 @@ public class SelectionController : MonoBehaviour
         if (selection.GetComponent<BuildLocation>())
         {
             BuildLocation buildlocation = selection.GetComponent<BuildLocation>();
-            FindObjectOfType<TowerSpawner>().buildTower(buildlocation);
-            Debug.Log(gameObject);
+            FindObjectOfType<TowerSpawner>().PreCheckTowerPlacement(buildlocation);
         }
         else
         {

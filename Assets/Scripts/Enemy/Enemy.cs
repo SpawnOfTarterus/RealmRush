@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     {
         int damage = other.GetComponentInParent<Tower>().GetDamage();
         GetComponent<Health>().TakeDamage(damage);
-        Debug.Log("Enemy hit!");
     }
 
     // Update is called once per frame

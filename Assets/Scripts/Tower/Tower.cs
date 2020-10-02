@@ -12,7 +12,7 @@ public class Tower : MonoBehaviour
     [SerializeField] float fireRange = 4.9f;
     Quaternion idlePos;
     float targetDistance = 0;
-
+    public BuildLocation builtPosition;
 
     public int GetDamage()
     {
