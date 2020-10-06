@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject hitFX = null;
     [SerializeField] GameObject deathFX = null;
     [SerializeField] GameObject exploadFX = null;
+    [SerializeField] int scoreValue = 10;
     public Transform FXParent;
          
     public Transform GetTargetPoint()
@@ -46,7 +47,14 @@ public class Enemy : MonoBehaviour
         GameObject exploadFXInstance = Instantiate(exploadFX, gameObject.transform.position, Quaternion.identity, FXParent);
         float deathDelay = exploadFXInstance.GetComponent<ParticleSystem>().main.duration;
         Destroy(exploadFXInstance, deathDelay);
+        FindObjectOfType<LivesControl>().LoseLife();
         Destroy(gameObject);
     }
 
+    public void Die()
+    {
+        PlayDeathFX();
+        FindObjectOfType<ScoreControl>().AddToScore(scoreValue);
+        Destroy(gameObject);
+    }
 }

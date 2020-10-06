@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildLocation : MonoBehaviour
 {
-    bool builtOn = false;
+    [SerializeField] bool builtOn = false;
 
     private void Start()
     {

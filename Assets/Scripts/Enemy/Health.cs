@@ -17,8 +17,7 @@ public class Health : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
-            GetComponent<Enemy>().PlayDeathFX();
-            Destroy(gameObject);
+            GetComponent<Enemy>().Die();
         }
         else
         {

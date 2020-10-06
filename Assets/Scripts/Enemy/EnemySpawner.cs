@@ -10,9 +10,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int maxEnemies = 1;
     [SerializeField] Transform FXParent = null;
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartSpawningEnemies()
     {
+        if(FindObjectOfType<PathFinder>().PathFind() == null) { Debug.Log("Cannot start level if path is blocked."); return; }
+        FindObjectOfType<UIControl>().DisableStartButton();
+        FindObjectOfType<TowerSpawner>().gameStarted = true;
         StartCoroutine(SpawnEnemies());
     }
 

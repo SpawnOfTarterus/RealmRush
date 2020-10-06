@@ -68,6 +68,7 @@ MonoBehaviour:
   hitFX: {fileID: 1505610324796538, guid: dcf9cd10c07cf0c49863969befadb243, type: 3}
   deathFX: {fileID: 1929956291960174, guid: 1a51bfda454239a41afb7dee687c6ac0, type: 3}
   exploadFX: {fileID: 1929956291960174, guid: 182714361ad8e944bb7a85dda2fc987f, type: 3}
+  scoreValue: 25
   FXParent: {fileID: 0}
 --- !u!114 &114078703179129330
 MonoBehaviour:

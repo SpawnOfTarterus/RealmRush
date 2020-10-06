@@ -23,6 +23,13 @@ public class PathFinder : MonoBehaviour
         return endBlock;
     }
 
+    private void ResetPathFinder()
+    {
+        queue.Clear();
+        grid.Clear();
+        searchCenter = null;
+    }
+
     public List<Block> PathFind()
     {
         LoadBlocks();
@@ -37,7 +44,7 @@ public class PathFinder : MonoBehaviour
             }
             ExploreNeighbors();
         }
-        //if (isRunning) { Debug.Log("Done Search Goal Not Found"); }
+        if (isRunning) { Debug.Log("Done Search Goal Not Found"); ResetPathFinder(); return null; }
         return GetPath();
     }
 
@@ -84,7 +91,11 @@ public class PathFinder : MonoBehaviour
             }
             if (block.GetComponent<BuildLocation>())
             {
-                continue;
+                if(block.GetComponent<BuildLocation>().GetLocationStatus())
+                {
+                    Debug.Log("tower build here");
+                    continue;
+                }
             }
             grid.Add(gridPos, block);
             block.explored = false;
