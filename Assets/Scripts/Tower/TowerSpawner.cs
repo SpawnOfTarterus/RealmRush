@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerSpawner : MonoBehaviour
 {
@@ -9,6 +10,18 @@ public class TowerSpawner : MonoBehaviour
     public bool gameStarted = false;
     [SerializeField] Transform towerResetLocation = null;
     [SerializeField] int towerLimit = 8;
+    [SerializeField] Text towerCountText = null;
+    int currentTowersInPlay = 0;
+
+    public void UpdateTowerCountText()
+    {
+        towerCountText.text = $"Towers {currentTowersInPlay}/{towerLimit}";
+    }
+
+    private void Start()
+    {
+        UpdateTowerCountText();
+    }
 
     public void RemoveAllTowers()
     {
@@ -19,12 +32,14 @@ public class TowerSpawner : MonoBehaviour
             if (tower.builtPosition != null) { tower.builtPosition.SetLocationStatus(false); }
             tower.builtPosition = null;
         }
+        currentTowersInPlay = 0;
+        UpdateTowerCountText();
     }
 
     public void PreCheckTowerPlacement(BuildLocation buildLocation)
     {
-        if(gameStarted) { Debug.Log("Can not build once the round has started."); return; }
-        if(buildLocation.GetLocationStatus()) { Debug.Log("Tower already placed here."); return; }
+        if(gameStarted) { FindObjectOfType<UIControl>().DisplayErrorText("Can not build once the round has started."); return; }
+        if(buildLocation.GetLocationStatus()) { FindObjectOfType<UIControl>().DisplayErrorText("Tower already placed here."); return; }
         CheckToMoveOrBuild(buildLocation);
     }
 
@@ -34,10 +49,14 @@ public class TowerSpawner : MonoBehaviour
         if (towerQueue.Count < towerLimit)
         {
             BuildTower(buildLocation);
+            currentTowersInPlay++;
+            UpdateTowerCountText();
         }
         else
         {
             MoveTower(buildLocation);
+            if(currentTowersInPlay < towerLimit) { currentTowersInPlay++; }
+            UpdateTowerCountText();
         }
     }
     

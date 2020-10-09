@@ -19,13 +19,8 @@ public class Enemy : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         int damage = other.GetComponentInParent<Tower>().GetDamage();
+        if (GetComponent<Health>().enabled == false) { return; }
         GetComponent<Health>().TakeDamage(damage);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
     }
 
     public void PlayHitFX()
@@ -48,6 +43,7 @@ public class Enemy : MonoBehaviour
         float deathDelay = exploadFXInstance.GetComponent<ParticleSystem>().main.duration;
         Destroy(exploadFXInstance, deathDelay);
         FindObjectOfType<LivesControl>().LoseLife();
+        FindObjectOfType<EnemySpawner>().RemoveEnemyFromInPlayList(this);
         Destroy(gameObject);
     }
 
@@ -55,6 +51,7 @@ public class Enemy : MonoBehaviour
     {
         PlayDeathFX();
         FindObjectOfType<ScoreControl>().AddToScore(scoreValue);
+        FindObjectOfType<EnemySpawner>().RemoveEnemyFromInPlayList(this);
         Destroy(gameObject);
     }
 }

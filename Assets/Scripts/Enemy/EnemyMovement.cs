@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 4f;
     PathFinder pathfinder = null;
     [SerializeField] Block lastBlockVisited = null;
+    public bool levelLost = false;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
     {
         for(int block = 0; block < path.Count; block++)
         {
+            if(levelLost) { yield break; }
             Vector3 destination = new Vector3(path[block].transform.position.x, transform.position.y, path[block].transform.position.z);
             transform.LookAt(destination);
             while(transform.position != destination)

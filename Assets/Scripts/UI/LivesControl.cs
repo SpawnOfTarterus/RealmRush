@@ -9,6 +9,11 @@ public class LivesControl : MonoBehaviour
     int maxLives = 10;
     Text livesText;
 
+    public int GetCurrentLives()
+    {
+        return currentLives;
+    }
+
     void Start()
     {
         currentLives = maxLives;
@@ -22,7 +27,7 @@ public class LivesControl : MonoBehaviour
         livesText.text = currentLives.ToString("Lives: 00");
         if (currentLives == 0)
         {
-            //gameOver
+            FindObjectOfType<SceneLoader>().LoadGameOverWithDelay();
         }
     }
 }
