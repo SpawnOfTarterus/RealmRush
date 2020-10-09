@@ -23,6 +23,7 @@ public class LivesControl : MonoBehaviour
 
     public void LoseLife()
     {
+        if(currentLives == 0 ) { return; }
         currentLives--;
         livesText.text = currentLives.ToString("Lives: 00");
         if (currentLives == 0)

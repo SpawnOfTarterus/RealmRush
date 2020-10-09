@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TowerSpawner : MonoBehaviour
 {
     [SerializeField] Tower towerPrefab = null;
-    Queue<Tower> towerQueue = new Queue<Tower>();
+    public Queue<Tower> towerQueue = new Queue<Tower>();
     public bool gameStarted = false;
     [SerializeField] Transform towerResetLocation = null;
     [SerializeField] int towerLimit = 8;
@@ -15,6 +15,7 @@ public class TowerSpawner : MonoBehaviour
 
     public void UpdateTowerCountText()
     {
+        if(towerCountText == null) { return; }
         towerCountText.text = $"Towers {currentTowersInPlay}/{towerLimit}";
     }
 

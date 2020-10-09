@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int maxEnemies = 1;
     [SerializeField] Transform FXParent = null;
     public List<Enemy> enemiesInPlay = new List<Enemy>();
+
+    private void Start()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            StartCoroutine(SpawnEnemies());
+        }
+    }
 
     public void StartSpawningEnemies()
     {
@@ -33,6 +42,7 @@ public class EnemySpawner : MonoBehaviour
     public void RemoveEnemyFromInPlayList(Enemy enemy)
     {
         enemiesInPlay.Remove(enemy);
+        if(SceneManager.GetActiveScene().buildIndex == 2) { return; }
         int currentLives = FindObjectOfType<LivesControl>().GetCurrentLives();
         if(enemiesInPlay.Count == 0 && currentLives != 0)
         {

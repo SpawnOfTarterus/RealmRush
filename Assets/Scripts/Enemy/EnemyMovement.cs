@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
             if(levelLost) { yield break; }
             Vector3 destination = new Vector3(path[block].transform.position.x, transform.position.y, path[block].transform.position.z);
             transform.LookAt(destination);
-            while(transform.position != destination)
+            while(transform.position != destination && !levelLost)
             {
                 transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
                 yield return null;
@@ -36,7 +36,7 @@ public class EnemyMovement : MonoBehaviour
             lastBlockVisited = path[block];
         }
         yield return null;
-        if (lastBlockVisited == pathfinder.GetEndBlock())
+        if (lastBlockVisited == pathfinder.GetEndBlock() && !levelLost)
         {
             GetComponent<Enemy>().ExploadOnTarget();
         }

@@ -19,13 +19,13 @@ public class Enemy : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         int damage = other.GetComponentInParent<Tower>().GetDamage();
-        if (GetComponent<Health>().enabled == false) { return; }
+        if (GetComponent<Health>().enabled == false) { PlayHitFX(); return; }
         GetComponent<Health>().TakeDamage(damage);
     }
 
     public void PlayHitFX()
     {
-        GameObject hitFXInstance = Instantiate(hitFX, gameObject.transform.position, Quaternion.identity, FXParent);
+        GameObject hitFXInstance = Instantiate(hitFX, targetPoint.position, Quaternion.identity, FXParent);
         float deathDelay = hitFXInstance.GetComponent<ParticleSystem>().main.duration;
         Destroy(hitFXInstance, deathDelay);
     }
@@ -39,18 +39,30 @@ public class Enemy : MonoBehaviour
 
     public void ExploadOnTarget()
     {
+        if (GetComponent<EnemyMovement>().levelLost) { return; }
         GameObject exploadFXInstance = Instantiate(exploadFX, gameObject.transform.position, Quaternion.identity, FXParent);
         float deathDelay = exploadFXInstance.GetComponent<ParticleSystem>().main.duration;
         Destroy(exploadFXInstance, deathDelay);
-        FindObjectOfType<LivesControl>().LoseLife();
+        if (FindObjectOfType<LivesControl>()) { FindObjectOfType<LivesControl>().LoseLife(); }
         FindObjectOfType<EnemySpawner>().RemoveEnemyFromInPlayList(this);
         Destroy(gameObject);
     }
 
     public void Die()
     {
+        if(GetComponent<EnemyMovement>().levelLost) { return; }
         PlayDeathFX();
         FindObjectOfType<ScoreControl>().AddToScore(scoreValue);
+        FindObjectOfType<EnemySpawner>().RemoveEnemyFromInPlayList(this);
+        Destroy(gameObject);
+    }
+
+    public void ExploadOnGameOver()
+    {
+        Debug.Log("Exploading " + gameObject.name);
+        GameObject exploadFXInstance = Instantiate(exploadFX, gameObject.transform.position, Quaternion.identity, FXParent);
+        float deathDelay = exploadFXInstance.GetComponent<ParticleSystem>().main.duration;
+        Destroy(exploadFXInstance, deathDelay);
         FindObjectOfType<EnemySpawner>().RemoveEnemyFromInPlayList(this);
         Destroy(gameObject);
     }

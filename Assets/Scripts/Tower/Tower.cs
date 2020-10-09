@@ -13,6 +13,7 @@ public class Tower : MonoBehaviour
     Quaternion idlePos;
     float targetDistance = 0;
     public BuildLocation builtPosition;
+    public bool levelLost = false;
 
     public int GetDamage()
     {
@@ -27,6 +28,7 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (levelLost) { gun.SetActive(false); return; }
         SetTarget();
         LookAtTarget();
         Fire();

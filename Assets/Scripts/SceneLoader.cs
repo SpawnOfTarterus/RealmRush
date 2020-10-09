@@ -5,11 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    [SerializeField] List<Enemy> enemies = new List<Enemy>();
+
     float levelTransitionTime = 3f;
+
+    public void LoadLevel1()
+    {
+        SceneManager.LoadScene(3);
+    }
 
     public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void LoadLastScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void LoadNextSceneWithDelay()
@@ -41,12 +53,23 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadGameOver()
     {
-        var enemies = FindObjectOfType<EnemySpawner>().enemiesInPlay;
+        var towers = FindObjectOfType<TowerSpawner>().towerQueue;
+        foreach (Tower tower in towers)
+        {
+            tower.levelLost = true;
+        }
+        enemies = FindObjectOfType<EnemySpawner>().enemiesInPlay;
         foreach(Enemy enemy in enemies)
         {
             enemy.GetComponent<EnemyMovement>().levelLost = true;
         }
-        yield return new WaitForSeconds(levelTransitionTime);
+        foreach (Enemy enemy in enemies.ToArray())
+        {
+            enemy.ExploadOnGameOver();
+            yield return new WaitForSeconds(0.5f);
+        }
+        while (enemies.Count != 0) { yield return null; }
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
     }
 

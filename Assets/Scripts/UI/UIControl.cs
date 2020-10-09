@@ -18,7 +18,7 @@ public class UIControl : MonoBehaviour
 
     private void Start()
     {
-        levelDisplayText.text = $"Level {SceneManager.GetActiveScene().buildIndex}";
+        levelDisplayText.text = $"Level {SceneManager.GetActiveScene().buildIndex - 2}";
     }
 
     public void DisplayErrorText(string errorMessage)
