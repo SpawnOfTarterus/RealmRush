@@ -38,6 +38,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        FindObjectOfType<DoNotDestroyOnLoad>().ResetScoreAndLives();
         SceneManager.LoadScene(0);
     }
 

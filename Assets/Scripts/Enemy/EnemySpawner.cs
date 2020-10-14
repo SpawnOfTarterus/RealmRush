@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Block startBlock = null;
     [SerializeField] int maxEnemies = 1;
     [SerializeField] Transform FXParent = null;
+    [SerializeField] int enemyMaxHealth = 10;
     public List<Enemy> enemiesInPlay = new List<Enemy>();
 
     private void Start()
@@ -23,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     public void StartSpawningEnemies()
     {
         if(FindObjectOfType<PathFinder>().PathFind() == null) { FindObjectOfType<UIControl>().DisplayErrorText("Cannot start level if path is blocked."); return; }
-        FindObjectOfType<UIControl>().DisableStartButton();
+        FindObjectOfType<UIControl>().DisableButtons();
         FindObjectOfType<TowerSpawner>().gameStarted = true;
         StartCoroutine(SpawnEnemies());
     }
@@ -48,5 +49,10 @@ public class EnemySpawner : MonoBehaviour
         {
             FindObjectOfType<SceneLoader>().LoadNextSceneWithDelay();
         }
+    }
+
+    public int GetMaxHealth()
+    {
+        return enemyMaxHealth;
     }
 }

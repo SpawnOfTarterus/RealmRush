@@ -20,4 +20,9 @@ public class ScoreControl : MonoBehaviour
         currentScore += scoreToAdd;
         scoreText.text = currentScore.ToString("Score: 0000");
     }
+
+    public int GetScore()
+    {
+        return currentScore;
+    }
 }

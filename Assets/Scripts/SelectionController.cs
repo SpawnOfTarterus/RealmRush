@@ -14,7 +14,7 @@ public class SelectionController : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<UIControl>().DisplayErrorText("Can't build here! This is a " + selection.name.Substring(0, selection.name.Length - (selection.name.Length - 4)));
+            FindObjectOfType<UIControl>().DisplayErrorText("Can't build here! This is a " + selection.name.Substring(0, selection.name.Length - (selection.name.Length - 4)) + ".");
         }
     }
 }

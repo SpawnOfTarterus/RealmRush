@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     {
         GameObject hitFXInstance = Instantiate(hitFX, targetPoint.position, Quaternion.identity, FXParent);
         float deathDelay = hitFXInstance.GetComponent<ParticleSystem>().main.duration;
+        AudioSource.PlayClipAtPoint(FindObjectOfType<SoundHub>().PlayTowerFiringSound(), Camera.main.transform.position, .05f);
         Destroy(hitFXInstance, deathDelay);
     }
 
@@ -34,12 +35,14 @@ public class Enemy : MonoBehaviour
     {
         GameObject deathFXInstance = Instantiate(deathFX, gameObject.transform.position, Quaternion.identity, FXParent);
         float deathDelay = deathFXInstance.GetComponent<ParticleSystem>().main.duration;
+        AudioSource.PlayClipAtPoint(FindObjectOfType<SoundHub>().PlayEnemyDeathSound(), Camera.main.transform.position, .05f);
         Destroy(deathFXInstance, deathDelay);
     }
 
     public void ExploadOnTarget()
     {
         if (GetComponent<EnemyMovement>().levelLost) { return; }
+        AudioSource.PlayClipAtPoint(FindObjectOfType<SoundHub>().PlayExplosionSound(), Camera.main.transform.position, .1f);
         GameObject exploadFXInstance = Instantiate(exploadFX, gameObject.transform.position, Quaternion.identity, FXParent);
         float deathDelay = exploadFXInstance.GetComponent<ParticleSystem>().main.duration;
         Destroy(exploadFXInstance, deathDelay);
@@ -59,8 +62,8 @@ public class Enemy : MonoBehaviour
 
     public void ExploadOnGameOver()
     {
-        Debug.Log("Exploading " + gameObject.name);
         GameObject exploadFXInstance = Instantiate(exploadFX, gameObject.transform.position, Quaternion.identity, FXParent);
+        AudioSource.PlayClipAtPoint(FindObjectOfType<SoundHub>().PlayExplosionSound(), Camera.main.transform.position, .1f);
         float deathDelay = exploadFXInstance.GetComponent<ParticleSystem>().main.duration;
         Destroy(exploadFXInstance, deathDelay);
         FindObjectOfType<EnemySpawner>().RemoveEnemyFromInPlayList(this);

@@ -46,7 +46,6 @@ public class TowerSpawner : MonoBehaviour
 
     private void CheckToMoveOrBuild(BuildLocation buildLocation)
     {
-        Debug.Log(towerQueue.Count);
         if (towerQueue.Count < towerLimit)
         {
             BuildTower(buildLocation);

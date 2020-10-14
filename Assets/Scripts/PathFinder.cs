@@ -39,7 +39,6 @@ public class PathFinder : MonoBehaviour
             searchCenter = queue.Dequeue();
             if(searchCenter == endBlock)
             {
-                //Debug.Log("goal found");
                 isRunning = false;
             }
             ExploreNeighbors();
@@ -93,7 +92,6 @@ public class PathFinder : MonoBehaviour
             {
                 if(block.GetComponent<BuildLocation>().GetLocationStatus())
                 {
-                    Debug.Log("tower build here");
                     continue;
                 }
             }

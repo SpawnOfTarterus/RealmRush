@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] int maxHealth = 1;
+    int maxHealth = 1;
     int health = 1;
 
     private void Start()
     {
+        var spawner = FindObjectOfType<EnemySpawner>();
+        maxHealth = spawner.GetMaxHealth();
         health = maxHealth;
     }
 

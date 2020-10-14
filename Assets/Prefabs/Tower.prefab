@@ -600,7 +600,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 500
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -4859,9 +4859,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerTop: {fileID: 3699930543620533726}
   gun: {fileID: 662188163}
+  gunVolume: 1
   damage: 20
   fireRange: 4.9
   builtPosition: {fileID: 0}
+  levelLost: 0
 --- !u!1001 &768862663401855220
 PrefabInstance:
   m_ObjectHideFlags: 0
